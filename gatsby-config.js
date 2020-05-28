@@ -1,10 +1,27 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: "My Title",
+    description: "my description",
+    author: "@myauthor",
+    twitterUsername: "@mytwitterusername",
+    image: "/someImage.jpeg",
+    siteUrl:
+      "https://www.reddit.com/r/gatsbyjs/comments/f2p6yp/problem_running_tutorial/fhdyvyq/",
   },
   plugins: [
+    {
+      resolve: `gatsby-source-prismic`,
+      options: {
+        repositoryName: `firstwebsite-05028`,
+        accessToken: `${process.env.API_KEY}`,
+        schemas: {
+          david: require("./src/schemas/david.json"),
+        },
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
